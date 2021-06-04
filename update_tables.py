@@ -29,5 +29,9 @@ def delete_word(engine, eng_word):
     """Удаляет слово из словаря."""
     eng_word.strip()
     engine.execute(f"delete from users where word_in_english='{eng_word}'")  # удалили слово из словаря
-    engine.execute(f"alter table users drop column {eng_word}")  # удалили слово из списка изучаемого
+    engine.execute(f"alter table users drop column `{eng_word}`")  # удалили слово из списка изучаемого
 
+
+def update_score(engine, uid, eng_word, modifier):
+    """Изменяет значение колонки eng_word напротив uid на modifier пунктов."""
+    engine.execute(f"""update users set `{eng_word}`=`{eng_word}`+'{modifier}' where uid='{uid}'""")
